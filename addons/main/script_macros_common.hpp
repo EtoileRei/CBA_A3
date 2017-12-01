@@ -1725,3 +1725,20 @@ Author:
     commy2
 ------------------------------------------- */
 #define IS_ADMIN_LOGGED serverCommandAvailable "#shutdown"
+
+/* -------------------------------------------
+Macro: PREPROCESSOR_TRIM_END
+    Flag for PREP preprocessor to trim whitespace resulting from included header files.
+
+Parameters:
+    None
+
+Example:
+    (begin example)
+        PREPROCESSOR_TRIM_END;
+    (end)
+
+Author:
+    commy2
+------------------------------------------- */
+#define PREPROCESSOR_TRIM_END xeh_trim = 1

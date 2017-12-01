@@ -143,3 +143,5 @@
     if (IS_LOCAL_SETTING(setting)) exitWith {priority min 0};\
     priority\
 })
+
+PREPROCESSOR_TRIM_END;
