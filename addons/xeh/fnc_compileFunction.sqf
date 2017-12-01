@@ -22,21 +22,22 @@ Author:
 ---------------------------------------------------------------------------- */
 #include "script_component.hpp"
 
-params [["_funcFile", "", [""]], ["_funcName", "", [""]], ["_trimHeaderInclude", false, [false]]];
+params [["_funcFile", "", [""]], ["_funcName", "", [""]]];
 
 private _cachedFunc = uiNamespace getVariable _funcName;
 
 if (isNil "_cachedFunc") then {
     private _precompiledScript = preprocessFileLineNumbers _funcFile;
 
-    //if (_trimHeaderInclude) then {
-        private _index = _precompiledScript find 'PREPROCESSOR_TRIM_END;';
+    private _index = -1;
 
-        if (_index > -1) then {
-            _index = _index + count 'PREPROCESSOR_TRIM_END;' + 1;
-            _precompiledScript = _precompiledScript select [_index];
-        };
-    //};
+    while {
+        _index = _precompiledScript find 'PREPROCESSOR_TRIM_END;';
+        _index > -1
+    } do {
+        _index = _index + count 'PREPROCESSOR_TRIM_END;';
+        _precompiledScript = _precompiledScript select [_index];
+    };
 
     uiNamespace setVariable [_funcName, compileFinal _precompiledScript];
     missionNamespace setVariable [_funcName, uiNamespace getVariable _funcName];
